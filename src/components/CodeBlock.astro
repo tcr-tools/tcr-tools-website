@@ -1,0 +1,46 @@
+---
+import { Code } from 'astro/components'
+
+interface Props {
+  code: string
+  lang?: any // strict typing for lang is complex in Astro, any is safe here for now
+  title?: string
+}
+
+const { code, lang = 'ts', title } = Astro.props
+---
+
+<div class="w-full max-w-2xl mx-auto my-12 relative group">
+  <div class="relative bg-[#080808] border border-dashed border-white/10 overflow-hidden">
+    {
+      title && (
+        <div class="px-4 py-2 border-b border-dashed border-white/10 flex items-center gap-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-white/20" />
+          <div class="w-2.5 h-2.5 rounded-full bg-white/10" />
+          <div class="w-2.5 h-2.5 rounded-full bg-white/10" />
+          <span class="ml-2 font-mono text-xs text-text-dim">{title}</span>
+        </div>
+      )
+    }
+    <div class="p-6 overflow-x-auto text-left text-sm">
+      <Code code={code} lang={lang} theme="github-dark-dimmed" />
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Shiki CSS Variables Theme Customization */
+  :root {
+    --shiki-foreground: #e5e5e5;
+    --shiki-background: #080808;
+    --shiki-token-constant: #00f0ff;
+    --shiki-token-string: #ce9178;
+    --shiki-token-comment: #6a9955;
+    --shiki-token-keyword: #569cd6;
+    --shiki-token-parameter: #9cdcfe;
+    --shiki-token-function: #dcdcaa;
+    --shiki-token-string-expression: #d69d85;
+    --shiki-token-punctuation: #d4d4d4;
+    --shiki-token-link: #569cd6;
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content'
+import Footer from '../components/Footer.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+
+const docs = await getCollection('docs')
+// Sort docs by order if available, or alphabetical by slug
+const sortedDocs = docs.sort((a, b) => {
+  const orderA = a.data.order ?? 999
+  const orderB = b.data.order ?? 999
+  if (orderA !== orderB) return orderA - orderB
+  return a.id.localeCompare(b.id)
+})
+
+const { title } = Astro.props
+---
+
+<Layout title={title}>
+  <Navigation />
+
+  <div class="flex flex-col md:flex-row w-full max-w-7xl mx-auto min-h-screen pt-16">
+    {/* Sidebar */}
+    <aside class="w-full md:w-96 border-r border-white/10 bg-bg-dark shrink-0">
+      <div class="sticky top-16 px-12 py-8 overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <h3 class="font-mono text-sm font-bold text-text-body mb-4 uppercase tracking-wider">
+          Documentation
+        </h3>
+        <ul class="space-y-1">
+          {
+            sortedDocs.map((doc) => (
+              <>
+                <li>
+                  <a
+                    href={`/docs/${doc.id}`}
+                    class:list={[
+                      'block px-3 py-2 text-sm transition-colors font-mono',
+                      Astro.url.pathname === `/docs/${doc.id}`
+                        ? 'text-primary bg-primary/10 border-l-2 border-primary'
+                        : 'text-text-dim hover:text-text-body hover:bg-white/5',
+                    ]}>
+                    {doc.data.title || doc.id}
+                  </a>
+                </li>
+                {(doc.id === 'terminology' || doc.id === 'runtime-lifecycle') && (
+                  <li class="w-full h-px border-t border-dashed border-white/10 my-4" />
+                )}
+              </>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+
+    {/* Content */}
+    <main class="flex-1 min-w-0">
+      <div class="w-full max-w-4xl mx-auto p-12">
+        <article
+          class="prose prose-invert prose-headings:font-sans prose-code:font-mono max-w-none"
+        >
+          <h1 class="text-4xl font-medium tracking-tight text-text-body mb-8">{title}</h1>
+          <slot />
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  /* Custom Prose Styles for Forensic Theme */
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    color: var(--color-text-body);
+    font-weight: 500;
+  }
+  .prose h1 {
+    margin-bottom: 1.5rem;
+  }
+  .prose h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+  }
+  .prose p {
+    color: var(--color-text-dim);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .prose strong {
+    color: var(--color-text-body);
+    font-weight: 600;
+  }
+  .prose code {
+    color: var(--color-primary);
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .prose pre {
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+  }
+  .prose a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-secondary);
+  }
+  .prose a:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    color: var(--color-text-dim);
+  }
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  .prose blockquote {
+    border-left-color: var(--color-primary);
+    color: var(--color-text-dim);
+    font-style: italic;
+  }
+</style>

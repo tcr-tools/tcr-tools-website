@@ -1,0 +1,283 @@
+---
+import Footer from '../components/Footer.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+
+const plans = [
+  {
+    name: 'Free',
+    tagline: 'Observe',
+    quote: '“Can I see what’s happening?”',
+    price: '$0',
+    features: [
+      'Core runtime',
+      'Timeline recording',
+      'Undo / redo',
+      'Studio (read-only)',
+      'Local-only usage',
+      'Bounded history window',
+    ],
+    limits: ['No causality graph', 'No forks / what-if', 'No exports'],
+    target: 'First-time users, Debugging basic async flows',
+  },
+  {
+    name: 'Pro',
+    tagline: 'Understand',
+    quote: '“Why did this happen?”',
+    price: '$29',
+    unit: '/ dev / month',
+    features: [
+      'Causality graph',
+      'Supersede / invalidate inspection',
+      'Fork & what-if exploration',
+      'Timeline comparison',
+      '.tcr import/export (local)',
+      'Offline replay',
+    ],
+    target: 'Professional developers, Teams debugging complex async UI',
+  },
+  {
+    name: 'Advanced',
+    tagline: 'Prove',
+    quote: '“Can I trust and prove this?”',
+    price: '$79',
+    unit: '/ dev / month',
+    features: [
+      'Deterministic replay guarantees',
+      'Proof exports (checksums)',
+      'Advanced DSL queries',
+      'Large / long-lived timelines',
+      'Forensic-grade inspection',
+    ],
+    target: 'Fintech, Compliance-heavy, Incident forensics',
+  },
+  {
+    name: 'Enterprise',
+    tagline: 'Control',
+    quote: '“This is infrastructure.”',
+    price: 'Custom',
+    unit: 'annual',
+    features: [
+      'Offline / air-gapped licensing',
+      'Organization-wide licenses',
+      'Internal redistribution',
+      'Long-term support (LTS)',
+      'Custom storage adapters',
+      'Legal / compliance alignment',
+    ],
+    target: 'Large organizations',
+  },
+]
+
+const featureMatrix = [
+  { feature: 'Core runtime', free: true, pro: true, adv: true },
+  { feature: 'Timeline / undo / redo', free: true, pro: true, adv: true },
+  { feature: 'Studio (read-only)', free: true, pro: true, adv: true },
+  { feature: 'Causality graph', free: false, pro: true, adv: true },
+  { feature: 'Supersede / invalidate chains', free: false, pro: true, adv: true },
+  { feature: 'Fork / what-if', free: false, pro: true, adv: true },
+  { feature: 'Timeline comparison', free: false, pro: true, adv: true },
+  { feature: '.tcr import/export', free: false, pro: true, adv: true },
+  { feature: 'Deterministic replay guarantees', free: false, pro: false, adv: true },
+  { feature: 'Proof / fingerprint exports', free: false, pro: false, adv: true },
+  { feature: 'Advanced DSL queries', free: false, pro: false, adv: true },
+]
+---
+
+<Layout title="Pricing | TCR">
+  <Navigation />
+
+  <main class="pb-24 pt-48 px-6 min-h-screen">
+    <div class="max-w-6xl mx-auto space-y-24">
+      {/* Header */}
+      <div class="text-center space-y-6">
+        <h1 class="text-5xl md:text-7xl font-medium tracking-tight text-text-body">
+          Pay for understanding, <br />
+          <span class="text-text-dim">not dashboards.</span>
+        </h1>
+        <p class="text-xl text-text-dim max-w-2xl mx-auto leading-relaxed">
+          TCR is licensed based on how deeply you inspect and control time.
+          <br /> The core runtime is free. Advanced inspection requires a license.
+        </p>
+      </div>
+
+      {/* Plans Layout */}
+      <div class="space-y-6">
+        {/* Free Plan - Horizontal Compact */}
+        {
+          [plans[0]].map((plan) => (
+            <div class="border border-dashed border-white/10 p-6 flex flex-col md:flex-row items-center justify-between gap-8 hover:border-primary/30 transition-colors duration-300">
+              <div class="flex-1 space-y-2">
+                <div class="flex items-center gap-4">
+                  <h3 class="text-lg font-mono font-bold text-text-body uppercase tracking-wider">
+                    {plan.name}
+                  </h3>
+                  <span class="text-4xl font-medium text-text-body">{plan.price}</span>
+                </div>
+                <p class="text-sm font-mono text-primary italic">_ {plan.tagline}</p>
+                <p class="text-sm text-text-dim italic border-l-2 border-white/10 pl-3">
+                  {plan.quote}
+                </p>
+              </div>
+
+              <div class="flex-1">
+                <ul class="columns-2 gap-8 space-y-1 text-sm text-text-dim">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-center gap-2">
+                      <span class="text-primary">›</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                  {plan.limits &&
+                    plan.limits.map((limit) => (
+                      <li class="flex items-center gap-2 text-white/30">
+                        <span>×</span>
+                        <span>{limit}</span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+
+              <div class="w-full md:w-auto border-t md:border-t-0 md:border-l border-white/5 pt-6 md:pt-0 md:pl-6">
+                <p class="text-xs text-text-dim font-mono leading-relaxed max-w-[200px]">
+                  <span class="block text-white/30 mb-1 uppercase text-[10px] tracking-widest">
+                    Target
+                  </span>
+                  {plan.target}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+
+        {/* Paid Plans - Vertical Grid */}
+        <div class="grid md:grid-cols-3 gap-6">
+          {
+            plans.slice(1).map((plan) => (
+              <div class="border border-white/10 bg-white/2 p-8 flex flex-col h-full hover:border-primary/30 transition-colors duration-300 relative group">
+                <div class="mb-8 space-y-2">
+                  <h3 class="text-xl font-mono font-bold text-text-body uppercase tracking-wider">
+                    {plan.name}
+                  </h3>
+                  <p class="text-sm font-mono text-primary italic">_ {plan.tagline}</p>
+                </div>
+
+                <div class="mb-10 min-h-[60px]">
+                  <p class="text-sm text-text-dim italic border-l-2 border-white/10 pl-3">
+                    {plan.quote}
+                  </p>
+                </div>
+
+                <div class="mb-10">
+                  <span class="text-5xl font-medium text-text-body">{plan.price}</span>
+                  {plan.unit && <span class="text-sm text-text-dim block mt-2">{plan.unit}</span>}
+                </div>
+
+                <div class="space-y-4 flex-1">
+                  <ul class="space-y-3 text-sm text-text-dim">
+                    {plan.features.map((feature) => (
+                      <li class="flex items-start gap-3">
+                        <span class="text-primary mt-0.5">›</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="mt-8">
+                  {plan.name === 'Enterprise' ? (
+                    <a
+                      href="/contact"
+                      class="block w-full py-3 text-center text-sm font-bold font-mono uppercase tracking-wider border border-white/30 text-white hover:bg-white hover:text-bg-dark transition-all duration-300">
+                      Contact for Licensing
+                    </a>
+                  ) : (
+                    <a
+                      href="/purchase"
+                      class="block w-full py-3 text-center text-sm font-bold font-mono uppercase tracking-wider border border-primary/30 text-primary hover:bg-primary hover:text-bg-dark transition-all duration-300">
+                      Purchase License
+                    </a>
+                  )}
+                </div>
+
+                <div class="mt-12 pt-6 border-t border-white/5">
+                  <p class="text-xs text-text-dim font-mono leading-relaxed">
+                    <span class="block text-white/30 mb-1 uppercase text-[10px] tracking-widest">
+                      Target
+                    </span>
+                    {plan.target}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {/* Feature Matrix */}
+      <div class="overflow-x-auto">
+        <h3 class="text-2xl font-medium text-text-body mb-8">Feature Matrix</h3>
+        <table class="w-full text-left border-collapse font-mono text-sm">
+          <thead>
+            <tr class="border-b border-white/10">
+              <th class="py-4 px-4 text-text-dim font-normal w-1/3">Capability</th>
+              <th class="py-4 px-4 text-text-body text-center w-1/6">Free</th>
+              <th class="py-4 px-4 text-primary text-center w-1/6">Pro</th>
+              <th class="py-4 px-4 text-secondary text-center w-1/6">Advanced</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5">
+            {
+              featureMatrix.map((row) => (
+                <tr class="hover:bg-white/5 transition-colors">
+                  <td class="py-3 px-4 text-text-dim">{row.feature}</td>
+                  <td class="py-3 px-4 text-center">
+                    {row.free ? (
+                      <span class="text-white/50">✓</span>
+                    ) : (
+                      <span class="text-white/10">—</span>
+                    )}
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    {row.pro ? (
+                      <span class="text-primary">✓</span>
+                    ) : (
+                      <span class="text-white/10">—</span>
+                    )}
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    {row.adv ? (
+                      <span class="text-secondary">✓</span>
+                    ) : (
+                      <span class="text-white/10">—</span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      {/* Licensing Note */}
+      <div class="max-w-3xl mx-auto text-center space-y-8 border-t border-white/10 pt-16">
+        <div class="space-y-4">
+          <h3 class="text-xl font-medium text-text-body">Why use a license?</h3>
+          <p class="text-text-dim leading-relaxed">
+            Feature gating is not artificial. Advanced features increase memory pressure, require
+            stronger determinism guarantees, and have legal forensic implications. Licensing
+            reflects operational responsibility, not just UI access.
+          </p>
+        </div>
+        <a
+          href="/docs/licensing"
+          class="inline-block text-primary hover:text-white transition-colors border-b border-primary border-dashed pb-0.5"
+        >
+          Read full licensing details →
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

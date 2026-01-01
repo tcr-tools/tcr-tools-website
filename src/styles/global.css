@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* User Provided Palette */
+  --color-background: #01051a;
+  --color-foreground: #fcfbf8;
+  --color-code-background: #00030e;
+  --color-card: #01051a;
+  --color-card-foreground: #01051a;
+  --color-primary: #e5cb3e;
+  --color-secondary: #3ee5be;
+  --color-muted: #2c3358;
+  --color-muted-foreground: #94a3b8; /* adjusted for text readability on dark bg if needed, or use FCFBF8 opacity */
+  --color-accent: #2c3358;
+  --color-accent-foreground: #01051a;
+  --color-border: #2c3358;
+
+  /* Semantic Mapping for App */
+  --color-bg-dark: var(--color-background);
+  --color-text-body: var(--color-foreground);
+  --color-text-dim: oklch(86.9% 0.022 252.894); /* Slate-400 for dim text */
+  --color-accent-cyan: var(--color-secondary); /* Our "Forensic" teal is now this */
+  --color-accent-gold: var(--color-primary);
+  --color-accent-red: #ff2a2a; /* Keep error red */
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: rgba(0, 240, 255, 0.2);
+    color: var(--color-accent-cyan);
+  }
+}
+
+@utility text-forensic {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+.astro-code.github-dark-dimmed {
+  background-color: transparent !important;
+}
+
+:where(pre):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  background-color: var(--color-code-background) !important;
+  border-radius: 0 !important;
+  padding-block: 1em !important;
+  padding-inline: 1.5em !important;
+}

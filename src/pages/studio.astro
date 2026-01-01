@@ -1,0 +1,242 @@
+---
+import Footer from '../components/Footer.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Studio | TCR">
+  <Navigation />
+
+  <main class="px-6 pt-48 min-h-screen">
+    <div class="max-w-6xl mx-auto">
+      {/* Hero */}
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 border border-primary/30 bg-primary/5 text-primary text-xs font-mono uppercase tracking-widest mb-4"
+      >
+        STUDIO & DEBUGGER
+      </div>
+      <div class="space-y-6 mb-24">
+        <h1 class="text-5xl md:text-7xl font-medium tracking-tight text-text-body">
+          Total Observability
+        </h1>
+        <p class="text-xl text-text-dim max-w-2xl leading-relaxed">
+          The Studio is a read-only observer. <br />It visualizes the journey, exposes the forks,
+          and traces the causality.
+        </p>
+      </div>
+
+      {/* Studio UI Mockup */}
+      <div class="relative border border-white/10 bg-[#050510] overflow-hidden shadow-2xl">
+        {/* Header */}
+        <div
+          class="h-12 border-b border-white/10 bg-white/5 flex items-center px-4 justify-between select-none"
+        >
+          <div class="flex items-center gap-6">
+            <div class="font-mono font-bold text-text-body tracking-wider text-sm">TCR STUDIO</div>
+            <div class="h-4 w-px bg-white/10"></div>
+            <div class="flex items-center gap-1 bg-black/50 p-1 border border-white/5">
+              <div class="px-3 py-1 bg-white/10 text-xs font-mono text-text-body shadow-sm">
+                Timeline
+              </div>
+              <div
+                class="px-3 py-1 text-xs font-mono text-text-dim hover:text-text-body transition-colors cursor-not-allowed"
+              >
+                Graph
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1">
+              <button
+                class="w-8 h-8 flex items-center justify-center hover:bg-white/5 text-text-dim transition-colors"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                  ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg
+                >
+              </button>
+              <span class="text-xs font-mono text-text-dim">442 / 1093</span>
+              <button
+                class="w-8 h-8 flex items-center justify-center hover:bg-white/5 text-text-dim transition-colors"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                  ><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg
+                >
+              </button>
+            </div>
+            <div class="h-4 w-px bg-white/10"></div>
+            <button
+              class="text-xs font-mono text-primary border border-primary/30 px-3 py-1 hover:bg-primary/10 transition-colors"
+              >Fit View</button
+            >
+          </div>
+        </div>
+
+        {/* Main Workspace */}
+        <div class="flex h-[500px]">
+          {/* Left: Timeline View */}
+          <div class="flex-1 flex flex-col min-w-0 border-r border-white/10 bg-[#020205]">
+            {/* Ruler */}
+            <div
+              class="h-8 border-b border-white/5 bg-white/2 flex items-end px-4 pb-1 overflow-hidden"
+            >
+              <div class="flex gap-24 text-[9px] font-mono text-white/20 select-none">
+                <span>0s</span><span>10ms</span><span>20ms</span><span>30ms</span><span>40ms</span
+                ><span>50ms</span><span>60ms</span><span>70ms</span>
+              </div>
+            </div>
+
+            {/* Lanes */}
+            <div class="flex-1 p-6 space-y-8 relative overflow-hidden">
+              {/* Connection Lines (Background) */}
+              <div class="absolute inset-0 pointer-events-none">
+                <svg class="w-full h-full opacity-20">
+                  <path
+                    d="M120 45 L180 95"
+                    stroke="#3ee5be"
+                    stroke-width="1"
+                    fill="none"
+                    stroke-dasharray="2 2"></path>
+                  <path d="M350 95 L420 45" stroke="white" stroke-width="1" fill="none"></path>
+                </svg>
+              </div>
+
+              {/* User Lane */}
+              <div class="flex items-center gap-6 relative group">
+                <div class="w-16 text-right font-mono text-[10px] text-text-dim">User</div>
+                <div class="flex-1 h-px bg-white/5 relative flex items-center">
+                  <div
+                    class="absolute left-[10%] w-2 h-2 bg-primary rounded-full hover:scale-150 transition-transform cursor-pointer shadow-[0_0_10px_rgba(229,203,62,0.5)]"
+                  >
+                  </div>
+                  <div
+                    class="absolute left-[30%] w-2 h-2 bg-primary rounded-full hover:scale-150 transition-transform cursor-pointer"
+                  >
+                  </div>
+                  <div
+                    class="absolute left-[85%] w-2 h-2 bg-primary rounded-full hover:scale-150 transition-transform cursor-pointer"
+                  >
+                  </div>
+                </div>
+              </div>
+
+              {/* System Lane */}
+              <div class="flex items-center gap-6 relative group">
+                <div class="w-16 text-right font-mono text-[10px] text-text-dim">System</div>
+                <div class="flex-1 h-px bg-white/5 relative flex items-center">
+                  {/* Expanded Cluster */}
+                  <div class="absolute left-[35%] top-1/2 -translate-y-1/2 flex gap-1">
+                    <div class="w-8 h-1.5 bg-secondary/80"></div>
+                    <div class="w-2 h-1.5 bg-secondary/80"></div>
+                  </div>
+                  <div class="absolute left-[65%] w-2 h-2 bg-secondary rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Network Lane */}
+              <div class="flex items-center gap-6 relative group">
+                <div class="w-16 text-right font-mono text-[10px] text-text-dim">Network</div>
+                <div class="flex-1 h-px bg-white/5 relative flex items-center">
+                  <div class="absolute left-[15%] w-12 h-1.5 bg-white/20"></div>
+                  <div class="absolute left-[80%] w-2 h-2 bg-red-500 shadow-[0_0_10px_red]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Inspection Panel */}
+          <div class="w-80 bg-bg-dark flex flex-col border-l border-white/5">
+            <div
+              class="h-10 border-b border-white/10 flex items-center px-4 font-mono text-[10px] uppercase text-text-dim font-bold tracking-wider"
+            >
+              Selected Intent
+            </div>
+            <div class="flex-1 p-4 font-mono text-xs overflow-y-auto">
+              <div class="space-y-4">
+                <div>
+                  <span class="text-white/30 block mb-1 text-[10px]">ID</span>
+                  <span class="text-text-dim">evt_2948a9c1</span>
+                </div>
+                <div>
+                  <span class="text-white/30 block mb-1 text-[10px]">Type</span>
+                  <span class="text-primary">USER_INTERACTION</span>
+                </div>
+                <div>
+                  <span class="text-white/30 block mb-1 text-[10px]">Status</span>
+                  <span class="text-secondary bg-secondary/10 px-1 py-0.5">RESOLVED</span>
+                </div>
+                <div>
+                  <span class="text-white/30 block mb-1 text-[10px]">Payload</span>
+                  <div class="p-2 -mx-2 bg-black/30 border border-white/5 mt-1 overflow-x-hidden">
+                    <span class="text-blue-400">target</span>: <span class="text-green-400"
+                      >"btn-save"</span
+                    ><br />
+                    <span class="text-blue-400">x</span>: <span class="text-yellow-400">420</span
+                    ><br />
+                    <span class="text-blue-400">y</span>: <span class="text-yellow-400">1080</span>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-white/30 block mb-1 text-[10px]">Resolution</span>
+                  <p
+                    class="text-[10px] text-white/50 leading-relaxed border-l border-white/10 pl-2"
+                  >
+                    Superseded previous intent <code>evt_110a...</code> due to 300ms debounce rule.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div
+          class="h-8 bg-black/80 border-t border-white/10 flex items-center px-4 justify-between font-mono text-[10px] text-white/30"
+        >
+          <div>Connected to ws://localhost:3000</div>
+          <div>TCR Core v2.0.0</div>
+        </div>
+      </div>
+
+      <p class="text-xs text-text-dim mb-16 mt-4">
+        * Visualization for demonstration purposes. Subject to change.
+      </p>
+
+      {/* Features Grid */}
+      <div class="grid md:grid-cols-3 gap-8 mb-24">
+        <div
+          class="space-y-4 border border-dashed border-white/10 p-6 hover:bg-white/5 transition-colors"
+        >
+          <h3 class="text-xl font-medium text-text-body">Timeline View</h3>
+          <p class="text-text-dim text-sm leading-relaxed">
+            A linear, multi-lane visualization of every event. Expand lanes to see forks. Scroll to
+            travel through time.
+          </p>
+        </div>
+
+        <div
+          class="space-y-4 border border-dashed border-white/10 p-6 hover:bg-white/5 transition-colors"
+        >
+          <h3 class="text-xl font-medium text-text-body">Causality Graph</h3>
+          <p class="text-text-dim text-sm leading-relaxed">
+            "Why did this happen?" Click any event to see its causal chain. Trace back through
+            supersede and invalidate relationships.
+          </p>
+        </div>
+
+        <div
+          class="space-y-4 border border-dashed border-white/10 p-6 hover:bg-white/5 transition-colors"
+        >
+          <h3 class="text-xl font-medium text-text-body">Inspector</h3>
+          <p class="text-text-dim text-sm leading-relaxed">
+            Deep dive into any specific intent. View the diff, specific resolution reason
+            <span class="text-primary">(`supspande`, `discard`)</span>, and state at that exact
+            moment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

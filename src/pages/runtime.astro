@@ -1,0 +1,200 @@
+---
+import Footer from '../components/Footer.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Runtime | TCR">
+  <Navigation />
+
+  <main class="pb-24 pt-48 px-6 min-h-screen">
+    <div class="max-w-4xl mx-auto space-y-24">
+      {/* Hero */}
+      <div class="space-y-6">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 border border-primary/30 bg-primary/5 text-primary text-xs font-mono uppercase tracking-widest mb-4"
+        >
+          Core Architecture
+        </div>
+        <h1 class="text-5xl md:text-7xl font-medium tracking-tight text-text-body">
+          The Temporal Layer
+        </h1>
+        <p class="text-xl text-text-dim max-w-2xl leading-relaxed">
+          Modern state managers answer "What is the current value?". <br />
+          TCR answers "What happened, why, and can I go back?".
+        </p>
+      </div>
+
+      {/* Comparison Grid */}
+      <div class="grid md:grid-cols-2 gap-12 border-y border-white/10 py-16">
+        <div class="space-y-4">
+          <h3 class="text-lg font-mono font-bold text-text-body uppercase tracking-wider">
+            Traditional State
+          </h3>
+          <ul class="space-y-3 text-text-dim text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">×</span> Mutation-based updates
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">×</span> Snapshot only (no history)
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">×</span> "Where am I?"
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">×</span> Reactive debugging
+            </li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-mono font-bold text-primary uppercase tracking-wider">
+            Temporal Layer
+          </h3>
+          <ul class="space-y-3 text-text-body text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-primary">›</span> Intent-based recording
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary">›</span> Traversable history
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary">›</span> "How did I get here?"
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary">›</span> Time-travel exploration
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Core Concepts */}
+      <div class="space-y-12">
+        <h2 class="text-3xl font-medium text-text-body">Core Concepts</h2>
+
+        <div class="grid gap-6">
+          <div
+            class="p-6 border border-white/10 bg-white/2 hover:border-primary/30 transition-colors"
+          >
+            <h3 class="font-mono text-primary text-lg mb-2">01. Intent (Time-Traveller)</h3>
+            <p class="text-text-dim text-sm leading-relaxed">
+              An intent is not just a payload. It's a record with a unique ID, timestamp, and
+              semantic meaning. It travels through the temporal layer, subject to conflict
+              resolution rules.
+            </p>
+          </div>
+
+          <div
+            class="p-6 border border-white/10 bg-white/2 hover:border-primary/30 transition-colors"
+          >
+            <h3 class="font-mono text-primary text-lg mb-2">02. Reality (Projection)</h3>
+            <p class="text-text-dim text-sm leading-relaxed">
+              Reality is merely the current projection of the history. Move the pointer back, and
+              reality shifts instantly. It is lazy, computed, and ephemeral.
+            </p>
+          </div>
+
+          <div
+            class="p-6 border border-white/10 bg-white/2 hover:border-primary/30 transition-colors"
+          >
+            <h3 class="font-mono text-primary text-lg mb-2">03. Resolution</h3>
+            <p class="text-text-dim text-sm leading-relaxed">
+              Intents can be recorded, superseded (replaced by newer intents), discarded (rejected
+              by logic), or deferred. This creates a causal graph of "why" a state exists.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Memory Architecture */}
+      <div class="space-y-8">
+        <h2 class="text-3xl font-medium text-text-body">Memory Architecture</h2>
+        <div class="relative flex flex-col gap-2 max-w-2xl mx-auto py-12">
+          {/* Vertical connection line */}
+          <div
+            class="absolute left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-primary/30 to-transparent -translate-x-1/2 hidden md:block"
+          >
+          </div>
+
+          {/* HOT TIER */}
+          <div
+            class="relative z-10 bg-bg-dark border border-primary/30 p-6 flex flex-col md:flex-row gap-6 items-center shadow-[0_0_30px_-10px_rgba(62,229,190,0.1)]"
+          >
+            <div class="text-right md:w-1/3">
+              <h3 class="text-primary font-mono font-bold uppercase tracking-wider text-sm">
+                Hot Tier
+              </h3>
+              <div class="text-[10px] text-primary/50 font-mono mt-1">Binary Ring Buffer</div>
+            </div>
+            <div class="md:w-px md:h-12 bg-primary/30 w-full h-px"></div>
+            <div class="flex-1 text-sm text-text-dim">
+              <ul class="space-y-1">
+                <li class="flex items-center gap-2">
+                  <div class="w-1 h-1 bg-primary rounded-full"></div>Struct-of-Arrays layout
+                </li>
+                <li class="flex items-center gap-2">
+                  <div class="w-1 h-1 bg-primary rounded-full"></div>Zero-copy access
+                </li>
+                <li class="flex items-center gap-2">
+                  <div class="w-1 h-1 bg-primary rounded-full"></div>Deterministic bounds
+                </li>
+              </ul>
+            </div>
+            <div
+              class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] font-mono bg-bg-dark px-2 text-text-dim border border-white/10 rounded-full"
+            >
+              Spill on pressure ↓
+            </div>
+          </div>
+
+          {/* WARM TIER */}
+          <div
+            class="relative z-10 bg-bg-dark border border-white/10 p-6 flex flex-col md:flex-row gap-6 items-center mt-4 opacity-80"
+          >
+            <div class="text-right md:w-1/3">
+              <h3 class="text-secondary font-mono font-bold uppercase tracking-wider text-sm">
+                Warm Tier
+              </h3>
+              <div class="text-[10px] text-secondary/50 font-mono mt-1">IndexedDB / Worker</div>
+            </div>
+            <div class="md:w-px md:h-12 bg-white/10 w-full h-px"></div>
+            <div class="flex-1 text-sm text-text-dim">
+              <ul class="space-y-1">
+                <li class="flex items-center gap-2">
+                  <div class="w-1 h-1 bg-secondary rounded-full"></div>Compressed JSON
+                </li>
+                <li class="flex items-center gap-2">
+                  <div class="w-1 h-1 bg-secondary rounded-full"></div>Lazy load on access
+                </li>
+              </ul>
+            </div>
+            <div
+              class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] font-mono bg-bg-dark px-2 text-text-dim border border-white/10 rounded-full"
+            >
+              Export for debugging ↓
+            </div>
+          </div>
+
+          {/* COLD TIER */}
+          <div
+            class="relative z-10 bg-bg-dark border border-dashed border-white/10 p-6 flex flex-col md:flex-row gap-6 items-center mt-4 opacity-50"
+          >
+            <div class="text-right md:w-1/3">
+              <h3 class="text-text-dim font-mono font-bold uppercase tracking-wider text-sm">
+                Cold Tier
+              </h3>
+              <div class="text-[10px] text-white/20 font-mono mt-1">Optional Export</div>
+            </div>
+            <div class="md:w-px md:h-12 bg-white/10 w-full h-px"></div>
+            <div class="flex-1 text-sm text-text-dim">
+              <ul class="space-y-1">
+                <li>Full history export for forensic analysis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,37 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="border-t border-white/5 bg-bg-dark py-12 mt-20">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start gap-24">
+    <div class="flex flex-col items-start gap-4">
+      <img src="/logotype.svg" alt="TCR Logo" class="h-6 w-auto" />
+
+      <span class="font-mono text-text-body">Temporal Coordination Runtime</span>
+
+      <div class="font-mono text-text-dim text-sm">
+        Built for determinism. <br />
+        Built for inspection.
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 text-text-dim font-mono">
+      <span class="text-text-body font-sans font-medium mb-2">Product</span>
+      <a href="/runtime" class="hover:text-primary transition-colors">Runtime</a>
+      <a href="/studio" class="hover:text-primary transition-colors">Studio</a>
+    </div>
+
+    <div class="flex flex-col gap-2 text-text-dim font-mono">
+      <span class="text-text-body font-sans font-medium mb-2">Resources</span>
+      <a href="/docs" class="hover:text-primary transition-colors">Docs</a>
+      <a href="https://github.com" class="hover:text-primary transition-colors">GitHub</a>
+      <a href="https://npmjs.com" class="hover:text-primary transition-colors">npm</a>
+    </div>
+  </div>
+  <div
+    class="max-w-6xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 flex justify-between items-center text-xs text-text-dim/50 font-mono"
+  >
+    <span>v0.1.0-alpha</span>
+    <span>&copy; {year} TCR Tools</span>
+  </div>
+</footer>

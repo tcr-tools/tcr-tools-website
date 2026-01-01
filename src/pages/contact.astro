@@ -1,0 +1,114 @@
+---
+import Footer from '../components/Footer.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Contact | TCR">
+  <Navigation />
+  <main class="py-24 px-6 min-h-screen">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-4xl text-text-body mb-8">Contact Us</h1>
+      <p class="text-text-dim mb-8">
+        Have questions about licensing, integration, or custom requirements? Send us a message
+        directly.
+      </p>
+
+      <form class="space-y-6" id="contact-form">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label for="name" class="block text-xs font-mono text-primary uppercase tracking-wider"
+              >Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full bg-white/5 border border-white/10 p-3 text-text-body focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-colors placeholder:text-white/20"
+              placeholder="Alice Engineer"
+            />
+          </div>
+          <div class="space-y-2">
+            <label for="email" class="block text-xs font-mono text-primary uppercase tracking-wider"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full bg-white/5 border border-white/10 p-3 text-text-body focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-colors placeholder:text-white/20"
+              placeholder="alice@company.com"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label for="subject" class="block text-xs font-mono text-primary uppercase tracking-wider"
+            >Subject</label
+          >
+          <select
+            id="subject"
+            name="subject"
+            class="w-full bg-white/5 border border-white/10 p-3 text-text-body focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-colors [&>option]:bg-bg-dark"
+          >
+            <option>General Inquiry</option>
+            <option>Commercial Licensing</option>
+            <option>Technical Support</option>
+            <option>Enterprise Partnership</option>
+          </select>
+        </div>
+
+        <div class="space-y-2">
+          <label for="message" class="block text-xs font-mono text-primary uppercase tracking-wider"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            class="w-full bg-white/5 border border-white/10 p-3 text-text-body focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-colors placeholder:text-white/20 resize-none"
+            placeholder="Tell us about your project..."></textarea>
+        </div>
+
+        <div class="pt-4">
+          <button
+            type="submit"
+            class="w-full md:w-auto px-8 py-3 bg-primary/10 border border-primary text-primary font-mono font-bold uppercase tracking-widest hover:bg-primary hover:text-bg-dark transition-all duration-300"
+          >
+            Send Message
+          </button>
+        </div>
+      </form>
+
+      {/* Success Message (Hidden by default) */}
+      <div
+        id="success-message"
+        class="hidden mt-8 p-6 border border-secondary/30 bg-secondary/5 text-center"
+      >
+        <div class="text-secondary font-mono text-lg mb-2">Message Sent</div>
+        <p class="text-text-dim text-sm">
+          We've received your inquiry and will get back to you shortly.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('contact-form')
+    const successMsg = document.getElementById('success-message')
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        // Mock submission
+        form.classList.add('hidden')
+        successMsg?.classList.remove('hidden')
+      })
+    }
+  </script>
+</Layout>
+
+<Footer />

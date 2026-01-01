@@ -1,0 +1,49 @@
+---
+const links = [
+  { text: 'RUNTIME', href: '/runtime' },
+  { text: 'STUDIO', href: '/studio' },
+  { text: 'DOCS', href: '/docs/introduction' },
+  { text: 'PRICING', href: '/pricing' },
+]
+const { pathname } = Astro.url
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md border-white/10 border-b">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/logotype.svg" alt="TCR Logo" class="h-4 w-auto" />
+    </a>
+
+    <div class="flex items-center h-full">
+      {
+        links.map((link) => {
+          const isActive = pathname.startsWith(link.href)
+          return (
+            <a
+              href={link.href}
+              class="relative h-full inline-flex items-center px-7 text-sm tracking-widest transition-colors duration-300 group">
+              {/* Bottom Border Line - Animated */}
+              <div
+                class:list={[
+                  'absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent transition-transform duration-500 ease-out',
+                  isActive
+                    ? 'scale-x-100 opacity-100'
+                    : 'scale-x-50 opacity-0 group-hover:scale-x-90 group-hover:opacity-50',
+                ]}
+              />
+
+              {/* Text */}
+              <span
+                class:list={[
+                  'relative z-10 font-mono',
+                  isActive ? 'text-primary' : 'text-text-dim group-hover:text-text-body',
+                ]}>
+                {link.text}
+              </span>
+            </a>
+          )
+        })
+      }
+    </div>
+  </div>
+</nav>

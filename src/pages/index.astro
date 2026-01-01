@@ -1,0 +1,152 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import Footer from '../components/Footer.astro'
+import Hero from '../components/Hero.astro'
+import Navigation from '../components/Navigation.astro'
+import Layout from '../layouts/Layout.astro'
+
+const codeExample = `const timeline = createTimeline()
+
+timeline.action({ type: 'save' })
+timeline.undo()
+timeline.fork() // create a parallel timeline`
+---
+
+<Layout title="TCR | Temporal Coordination Runtime">
+  <Navigation />
+
+  <main>
+    <Hero />
+
+    {/* Problem Section */}
+    <section class="py-24 px-6 relative border-t border-white/5">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-medium text-text-body mb-6">
+              State is a snapshot. <br />
+              <span class="text-text-dim">Bugs live in time.</span>
+            </h2>
+            <div class="space-y-4 text-text-dim leading-relaxed">
+              <p>
+                Modern applications don’t fail because state is wrong. They fail because time is
+                lost.
+              </p>
+              <p>Events race. Intents override each other. You see the result — not the path.</p>
+              <p class="text-text-body border-l-2 border-primary pl-4">
+                TCR models what happened, why it happened, and what else could have happened.
+              </p>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="font-mono text-xs text-text-dim mb-2 uppercase tracking-wider">
+              Target Audience
+            </div>
+            <ul class="space-y-2 text-sm text-text-body/80">
+              <li>Teams debugging complex async flows</li>
+              <li>High-risk UI (Fintech, Healthcare)</li>
+              <li>Deterministic replay requirements</li>
+            </ul>
+            <div class="mt-8 text-xs font-mono text-primary">
+              Free to observe.<br />Paid to understand.<br />Licensed to prove.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Mental Model Section */}
+    <section class="py-24 px-6 bg-white/2">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-mono text-text-body mb-12">&lt;TemporalControlPlane /&gt;</h2>
+
+        <div
+          class="max-w-2xl mx-auto my-16 font-mono text-sm md:text-base text-text-dim select-none overflow-x-auto pb-4 space-y-4"
+        >
+          <div class="flex items-center justify-center gap-4">
+            <div class="px-8 py-2 border border-dashed border-white/20">Intent</div>
+            <div class="text-primary">──▶</div>
+            <div class="px-8 py-2 border border-white/20">Resolution</div>
+            <div class="text-primary">──▶</div>
+            <div class="px-8 py-2 border border-primary/30 bg-primary/5 text-primary">Timeline</div>
+          </div>
+          <div class="flex items-center justify-center gap-4 place-self-end">
+            <div class="text-primary">└──▶</div>
+            <div class="px-8 py-2 border border-dashed border-primary/30 bg-primary/5 text-primary">
+              Fork
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 text-left text-sm divide-x divide-white/10">
+          <div class="py-4 px-6 hover:bg-white/5 transition-colors">
+            <strong class="block text-text-body mb-2">Intent</strong>
+            <span class="text-text-dim">Immutable record of "what was attempted".</span>
+          </div>
+          <div class="py-4 px-6 hover:bg-white/5 transition-colors">
+            <strong class="block text-text-body mb-2">Resolution</strong>
+            <span class="text-text-dim">Why it was committed or discarded.</span>
+          </div>
+          <div class="py-4 px-6 hover:bg-white/5 transition-colors">
+            <strong class="block text-text-body mb-2">Timeline</strong>
+            <span class="text-text-dim">A traversable history, not just a log.</span>
+          </div>
+          <div class="py-4 px-6 hover:bg-white/5 transition-colors">
+            <strong class="block text-text-body mb-2">Fork</strong>
+            <span class="text-text-dim">Explore alternatives safely.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Capabilities Section */}
+    <section class="py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 border border-white/5 duration-300 hover:border-primary/30 bg-white/2">
+            <h3 class="text-lg font-medium text-text-body mb-4">Why did this happen?</h3>
+            <ul class="space-y-2 text-sm text-text-dim list-disc list-inside">
+              <li>Causality graph</li>
+              <li>Supersede / invalidate chains</li>
+              <li>Resolution reasons</li>
+            </ul>
+            <div class="mt-4 text-xs font-mono text-white/30">Included in Pro</div>
+          </div>
+
+          <div class="p-6 border border-white/5 duration-300 hover:border-primary/30 bg-white/2">
+            <h3 class="text-lg font-medium text-text-body mb-4">What if it didn't?</h3>
+            <ul class="space-y-2 text-sm text-text-dim list-disc list-inside">
+              <li>Fork from any point</li>
+              <li>Parallel timelines</li>
+              <li>Side-by-side comparison</li>
+            </ul>
+            <div class="mt-4 text-xs font-mono text-white/30">Included in Pro</div>
+          </div>
+
+          <div class="p-6 border border-white/5 duration-300 hover:border-primary/30 bg-white/2">
+            <h3 class="text-lg font-medium text-text-body mb-4">Can I prove it?</h3>
+            <ul class="space-y-2 text-sm text-text-dim list-disc list-inside">
+              <li>Deterministic replay</li>
+              <li>Exportable .tcr files</li>
+              <li>Checksums and fingerprints</li>
+            </ul>
+            <div class="mt-4 text-xs font-mono text-primary/50">Advanced License</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Code Section */}
+    <section class="py-24 px-6 bg-white/2 border-y border-white/5">
+      <div class="max-w-3xl mx-auto text-center">
+        <CodeBlock code={codeExample} title="demo.ts" />
+        <p class="text-sm font-mono text-text-dim mt-8">
+          Core runtime is free. <br />
+          Advanced inspection requires a paid license.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
