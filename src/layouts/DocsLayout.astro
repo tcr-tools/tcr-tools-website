@@ -35,7 +35,7 @@ const { title } = Astro.props
                     href={`/docs/${doc.id}`}
                     class:list={[
                       'block px-3 py-2 text-sm transition-colors font-mono',
-                      Astro.url.pathname === `/docs/${doc.id}`
+                      Astro.url.pathname.includes(doc.id)
                         ? 'text-primary bg-primary/10 border-l-2 border-primary'
                         : 'text-text-dim hover:text-text-body hover:bg-white/5',
                     ]}>
